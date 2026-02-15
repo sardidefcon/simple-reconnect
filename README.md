@@ -1,6 +1,6 @@
-# Simple Reconnect
+<p align="center"><img src="https://i.ibb.co/cc0CjQmw/568fe15e4c25bbdea989b29dccc3d215b8970f4e9b6d096819248b44f372ec15a8ecd8faa7643123da39a3ee5e6b4b0d3255.png" /></p>
 
-Simple Velocity plugin that reconnects players to the last server they were connected to when they log in.
+A plugin for Velocity that reconnects players to the last server they were playing on
 
 ## Features
 
@@ -20,7 +20,7 @@ Simple Velocity plugin that reconnects players to the last server they were conn
 | /vreconnect reload  | Reloads the plugin configuration |
 
 - **reload**: requires permission **`velocity.reconnect.reload`** (default: op)
-- Works in-game and from the proxy console
+  - Works in-game and from the proxy console
 
 ## Requirements
 
