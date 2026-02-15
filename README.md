@@ -99,6 +99,36 @@ storage:
 - **storage.method**: Storage backend. Options: `yaml`, `sqlite`, `mysql`, `mariadb`, `postgresql`, `luckperms`
 - **storage.data**: Connection settings for database backends. For SQLite/YAML, `database` is the file path
 
+## Storage
+
+In the `config.yml`, there are different storage options. If you don't need your 
+own plugins to interact with this one, we recommend you keep the `method` set as the default
+option (`yaml`).
+
+```yml
+storage:
+  method: "yaml"
+  # The below is only needed if you are using MySQL
+  data:
+    address: localhost
+    database: reconnect
+    username: root
+    password: ''
+```
+
+To change the method, alter the `method` key. Current options are:
+
+- `yaml` - Local .yml file
+- `sqlite` - Local SQL database
+- `mysql` - Local or remote SQL database
+
+The `data` section is for if you are using the `mysql` option for `method`.
+
+- `address` - The Address of the SQL database
+- `database` - The name of the database
+- `username` - Username for the SQL database
+- `password` - Password for the SQL database
+
 ## Notes
 
 - When using a forced host, the plugin does not override the initial server choice
@@ -106,5 +136,4 @@ storage:
 - For LuckPerms storage, the last server is stored as user metadata
 
 ## License
-
 Distributed under the MIT License
