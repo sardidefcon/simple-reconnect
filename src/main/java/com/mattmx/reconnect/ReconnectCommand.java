@@ -1,6 +1,7 @@
 package com.mattmx.reconnect;
 
 import com.mattmx.reconnect.util.MessageHelper;
+import com.mattmx.reconnect.ConfigUpdater;
 import com.mattmx.reconnect.util.VelocityChat;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
@@ -22,7 +23,8 @@ public class ReconnectCommand {
                 .executes((context) -> {
 
                     context.getSource().sendMessage(VelocityChat.color("<green>Reloading plugin"));
-                    plugin.saveDefaultConfig();
+                    ConfigUpdater.mergeWithDefaults(plugin);
+                    plugin.reloadConfig();
                     plugin.loadStorage();
                     context.getSource().sendMessage(VelocityChat.color("<green>Reloaded!"));
 

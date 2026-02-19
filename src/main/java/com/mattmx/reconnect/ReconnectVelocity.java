@@ -64,6 +64,7 @@ public class ReconnectVelocity {
         instance = this;
 
         saveDefaultConfig();
+        ConfigUpdater.mergeWithDefaults(this);
 
         StorageManager.registerStorageMethod(new MySqlStorage());
         StorageManager.registerStorageMethod(new MariaDbStorage());
@@ -131,6 +132,22 @@ public class ReconnectVelocity {
             configLocation.renameTo(configLocation.getParentFile().toPath().resolve("config-old.yml").toFile());
             saveDefaultConfig();
         }
+    }
+
+    /**
+     * Reloads config from disk into memory. Call after ConfigUpdater.mergeWithDefaults
+     * or when config may have changed on disk.
+     */
+    public void reloadConfig() {
+        try {
+            this.config = loader.load().get(ReconnectConfig.class);
+        } catch (ConfigurateException e) {
+            getLogger().error("Failed to reload config", e);
+        }
+    }
+
+    public @NotNull YamlConfigurationLoader getLoader() {
+        return loader;
     }
 
     @Subscribe
