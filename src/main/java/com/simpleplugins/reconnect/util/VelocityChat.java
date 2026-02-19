@@ -1,4 +1,4 @@
-package com.mattmx.reconnect.util;
+package com.simpleplugins.reconnect.util;
 
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.server.RegisteredServer;

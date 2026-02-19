@@ -1,6 +1,6 @@
-package com.mattmx.reconnect.storage;
+package com.simpleplugins.reconnect.storage;
 
-import com.mattmx.reconnect.ReconnectVelocity;
+import com.simpleplugins.reconnect.ReconnectVelocity;
 import com.velocitypowered.api.scheduler.ScheduledTask;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

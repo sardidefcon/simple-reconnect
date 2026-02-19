@@ -1,4 +1,4 @@
-package com.mattmx.reconnect;
+package com.simpleplugins.reconnect;
 
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
 import org.spongepowered.configurate.objectmapping.meta.Comment;

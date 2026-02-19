@@ -1,4 +1,4 @@
-package com.mattmx.reconnect.util.updater;
+package com.simpleplugins.reconnect.util.updater;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -69,4 +69,3 @@ public class UpdateChecker {
         return link;
     }
 }
-

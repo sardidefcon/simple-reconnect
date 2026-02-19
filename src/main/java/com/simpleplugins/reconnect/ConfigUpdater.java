@@ -1,4 +1,4 @@
-package com.mattmx.reconnect;
+package com.simpleplugins.reconnect;
 
 import org.spongepowered.configurate.ConfigurationNode;
 import org.spongepowered.configurate.BasicConfigurationNode;

@@ -1,8 +1,8 @@
-package com.mattmx.reconnect;
+package com.simpleplugins.reconnect;
 
 import com.google.inject.Inject;
-import com.mattmx.reconnect.storage.*;
-import com.mattmx.reconnect.util.updater.UpdateChecker;
+import com.simpleplugins.reconnect.storage.*;
+import com.simpleplugins.reconnect.util.updater.UpdateChecker;
 import com.moandjiezana.toml.TomlWriter;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;

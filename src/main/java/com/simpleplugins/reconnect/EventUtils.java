@@ -1,6 +1,6 @@
-package com.mattmx.reconnect;
+package com.simpleplugins.reconnect;
 
-import com.mattmx.reconnect.util.ReconnectUtil;
+import com.simpleplugins.reconnect.util.ReconnectUtil;
 import com.velocitypowered.api.event.player.PlayerChooseInitialServerEvent;
 import com.velocitypowered.api.proxy.server.RegisteredServer;
 import org.slf4j.Logger;

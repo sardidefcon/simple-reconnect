@@ -1,8 +1,8 @@
-package com.mattmx.reconnect;
+package com.simpleplugins.reconnect;
 
-import com.mattmx.reconnect.util.MessageHelper;
-import com.mattmx.reconnect.ConfigUpdater;
-import com.mattmx.reconnect.util.VelocityChat;
+import com.simpleplugins.reconnect.util.MessageHelper;
+import com.simpleplugins.reconnect.ConfigUpdater;
+import com.simpleplugins.reconnect.util.VelocityChat;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.tree.LiteralCommandNode;

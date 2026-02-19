@@ -47,7 +47,7 @@ tasks {
         archiveBaseName.set("SimpleReconnect")
         mergeServiceFiles()
         // Reubicar SnakeYAML para que el plugin use su propia copia y no la del servidor
-        relocate("org.yaml.snakeyaml", "com.mattmx.reconnect.lib.org.yaml.snakeyaml")
+        relocate("org.yaml.snakeyaml", "com.simpleplugins.reconnect.lib.org.yaml.snakeyaml")
     }
     runVelocity {
         velocityVersion(libs.versions.velocity.get())

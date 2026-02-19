@@ -1,7 +1,7 @@
-package com.mattmx.reconnect.storage;
+package com.simpleplugins.reconnect.storage;
 
-import com.mattmx.reconnect.ReconnectCommand;
-import com.mattmx.reconnect.ReconnectVelocity;
+import com.simpleplugins.reconnect.ReconnectCommand;
+import com.simpleplugins.reconnect.ReconnectVelocity;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.NodeType;

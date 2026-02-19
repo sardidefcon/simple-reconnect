@@ -1,6 +1,6 @@
-package com.mattmx.reconnect.hook;
+package com.simpleplugins.reconnect.hook;
 
-import com.mattmx.reconnect.ReconnectVelocity;
+import com.simpleplugins.reconnect.ReconnectVelocity;
 import com.velocitypowered.api.proxy.Player;
 import litebans.api.Database;
 import org.jetbrains.annotations.NotNull;

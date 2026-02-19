@@ -1,9 +1,9 @@
-package com.mattmx.reconnect;
+package com.simpleplugins.reconnect;
 
-import com.mattmx.reconnect.hook.LiteBansHook;
-import com.mattmx.reconnect.util.MessageHelper;
-import com.mattmx.reconnect.util.VelocityChat;
-import com.mattmx.reconnect.util.updater.UpdateChecker;
+import com.simpleplugins.reconnect.hook.LiteBansHook;
+import com.simpleplugins.reconnect.util.MessageHelper;
+import com.simpleplugins.reconnect.util.VelocityChat;
+import com.simpleplugins.reconnect.util.updater.UpdateChecker;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.connection.LoginEvent;
 import com.velocitypowered.api.event.player.KickedFromServerEvent;

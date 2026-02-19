@@ -1,7 +1,7 @@
-package com.mattmx.reconnect.storage;
+package com.simpleplugins.reconnect.storage;
 
-import com.mattmx.reconnect.ReconnectConfig;
-import com.mattmx.reconnect.ReconnectVelocity;
+import com.simpleplugins.reconnect.ReconnectConfig;
+import com.simpleplugins.reconnect.ReconnectVelocity;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class PostgreSQLStorage extends StorageMethod {
+public class MariaDbStorage extends StorageMethod {
     private HikariDataSource ds;
 
     @Override
@@ -22,7 +22,7 @@ public class PostgreSQLStorage extends StorageMethod {
         if (config.storage.data.connectionParameters.useJdbcString) {
             hikariConfig.setJdbcUrl(config.storage.data.connectionParameters.jdbcString);
         } else {
-            hikariConfig.setJdbcUrl("jdbc:postgresql://" + config.storage.data.address + "/" + config.storage.data.database);
+            hikariConfig.setJdbcUrl("jdbc:mariadb://" + config.storage.data.address + "/" + config.storage.data.database);
         }
         hikariConfig.setUsername(config.storage.data.username);
         hikariConfig.setPassword(config.storage.data.password);
@@ -35,12 +35,13 @@ public class PostgreSQLStorage extends StorageMethod {
         hikariConfig.setPoolName("reconnect");
 
         ds = new HikariDataSource(hikariConfig);
+
         try (Connection con = ds.getConnection()) {
             Statement statement = con.createStatement();
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS reconnect_data(" +
-                "uuid VARCHAR(255)," +
-                "lastserver TEXT," +
-                "PRIMARY KEY(uuid))");
+                    "uuid VARCHAR(255)," +
+                    "lastserver MEDIUMTEXT," +
+                    "PRIMARY KEY(uuid))");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -51,8 +52,8 @@ public class PostgreSQLStorage extends StorageMethod {
         try (Connection con = ds.getConnection()) {
             Statement statement = con.createStatement();
             statement.executeUpdate(
-                "INSERT INTO reconnect_data VALUES ('" + uuid + "','" + servername + "')" +
-                    "ON CONFLICT (uuid) DO UPDATE SET lastserver = '" + servername + "'");
+                    "INSERT INTO reconnect_data VALUES ('" + uuid + "','" + servername + "')" +
+                            "ON DUPLICATE KEY UPDATE lastserver = '" + servername + "'");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -79,6 +80,6 @@ public class PostgreSQLStorage extends StorageMethod {
 
     @Override
     public String getMethod() {
-        return "postgresql";
+        return "mariadb";
     }
 }

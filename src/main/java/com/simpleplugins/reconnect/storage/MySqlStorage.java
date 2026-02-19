@@ -1,7 +1,7 @@
-package com.mattmx.reconnect.storage;
+package com.simpleplugins.reconnect.storage;
 
-import com.mattmx.reconnect.ReconnectConfig;
-import com.mattmx.reconnect.ReconnectVelocity;
+import com.simpleplugins.reconnect.ReconnectConfig;
+import com.simpleplugins.reconnect.ReconnectVelocity;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class SQLiteStorage extends StorageMethod {
+public class MySqlStorage extends StorageMethod {
     private HikariDataSource ds;
 
     @Override
@@ -18,17 +18,28 @@ public class SQLiteStorage extends StorageMethod {
         ReconnectConfig config = ReconnectVelocity.get().getConfig();
 
         HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setDriverClassName(org.sqlite.JDBC.class.getName());
-        hikariConfig.setJdbcUrl("jdbc:sqlite:" + ReconnectVelocity.get().getDataDirectory() + "/" + config.storage.data.database);
+        hikariConfig.setDriverClassName(org.mariadb.jdbc.Driver.class.getName());
+        if (config.storage.data.connectionParameters.useJdbcString) {
+            hikariConfig.setJdbcUrl(config.storage.data.connectionParameters.jdbcString);
+        } else {
+            hikariConfig.setJdbcUrl("jdbc:mariadb://" + config.storage.data.address + "/" + config.storage.data.database);
+        }
+        hikariConfig.setUsername(config.storage.data.username);
+        hikariConfig.setPassword(config.storage.data.password);
+        hikariConfig.setConnectionTimeout(config.storage.data.connectionParameters.connectionTimeout);
+        hikariConfig.setIdleTimeout(config.storage.data.connectionParameters.idleTimeout);
+        hikariConfig.setKeepaliveTime(config.storage.data.connectionParameters.keepAliveTime);
+        hikariConfig.setMaxLifetime(config.storage.data.connectionParameters.maxLifetime);
+        hikariConfig.setMinimumIdle(config.storage.data.connectionParameters.minimumIdle);
+        hikariConfig.setMaximumPoolSize(config.storage.data.connectionParameters.maximumPoolSize);
         hikariConfig.setPoolName("reconnect");
 
         ds = new HikariDataSource(hikariConfig);
         try (Connection con = ds.getConnection()) {
             Statement statement = con.createStatement();
-            statement.setQueryTimeout(0);
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS reconnect_data(" +
-                    "uuid TEXT," +
-                    "lastserver TEXT," +
+                    "uuid VARCHAR(255)," +
+                    "lastserver MEDIUMTEXT," +
                     "PRIMARY KEY(uuid))");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -40,9 +51,8 @@ public class SQLiteStorage extends StorageMethod {
         try (Connection con = ds.getConnection()) {
             Statement statement = con.createStatement();
             statement.executeUpdate(
-                    "INSERT OR IGNORE INTO reconnect_data VALUES ('" + uuid + "', '" + servername + "');" +
-                            "UPDATE reconnect_data SET lastserver = '" + servername + "' where uuid ='" + uuid + "'"
-            );
+                    "INSERT INTO reconnect_data VALUES ('" + uuid + "','" + servername + "')" +
+                            "ON DUPLICATE KEY UPDATE lastserver = '" + servername + "'");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -69,6 +79,6 @@ public class SQLiteStorage extends StorageMethod {
 
     @Override
     public String getMethod() {
-        return "sqlite";
+        return "mysql";
     }
 }
