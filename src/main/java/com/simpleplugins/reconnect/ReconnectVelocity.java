@@ -11,6 +11,7 @@ import com.velocitypowered.api.plugin.Dependency;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
+import org.bstats.velocity.Metrics;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -42,6 +43,7 @@ public class ReconnectVelocity {
     private final @Nullable ProxyServer proxy;
     private final @Nullable Logger logger;
     private final @Nullable Path dataDirectory;
+    private final Metrics.Factory metricsFactory;
 
     private final File configLocation;
     private final YamlConfigurationLoader loader;
@@ -50,10 +52,16 @@ public class ReconnectVelocity {
     private UpdateChecker checker;
 
     @Inject
-    public ReconnectVelocity(@Nullable ProxyServer server, @Nullable Logger logger, @DataDirectory @Nullable Path dataDirectory) {
+    public ReconnectVelocity(
+            @Nullable ProxyServer server,
+            @Nullable Logger logger,
+            @DataDirectory @Nullable Path dataDirectory,
+            Metrics.Factory metricsFactory
+    ) {
         this.proxy = server;
         this.logger = logger;
         this.dataDirectory = dataDirectory;
+        this.metricsFactory = metricsFactory;
 
         configLocation = getDataDirectory().resolve("config.yml").toFile();
 
@@ -152,6 +160,10 @@ public class ReconnectVelocity {
 
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
+        // bStats metrics
+        int pluginId = 29643;
+        metricsFactory.make(this, pluginId);
+
         loadStorage();
 
         getProxy().getEventManager().register(this, new ReconnectListener(this));

@@ -19,6 +19,9 @@ dependencies {
     compileOnly(libs.litebans.api)
     compileOnly(libs.luckperms.api)
 
+    // bStats metrics for Velocity
+    implementation("org.bstats:bstats-velocity:3.1.0")
+
     // SnakeYAML 1.33 empaquetado y reubicado para evitar conflicto con el SnakeYAML del servidor (Velocity/Paper)
     implementation(libs.snakeyaml)
     implementation(libs.storage.yaml) {
@@ -48,6 +51,8 @@ tasks {
         mergeServiceFiles()
         // Reubicar SnakeYAML para que el plugin use su propia copia y no la del servidor
         relocate("org.yaml.snakeyaml", "com.simpleplugins.reconnect.lib.org.yaml.snakeyaml")
+        // Reubicar bStats para evitar conflictos con otros plugins
+        relocate("org.bstats", "com.simpleplugins.reconnect.bstats")
     }
     runVelocity {
         velocityVersion(libs.versions.velocity.get())
