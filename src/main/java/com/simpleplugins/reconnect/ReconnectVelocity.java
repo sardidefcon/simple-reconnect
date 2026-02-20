@@ -29,7 +29,7 @@ import java.util.Objects;
 @Plugin(
     id = "reconnect",
     name = "Simple Reconnect",
-    version = "1.0",
+    version = "1.1.0",
     description = "Reconnect your players to their last server",
     url = "https://github.com/sardidefcon/simplereconnect",
     authors = {"sardidefcon"},

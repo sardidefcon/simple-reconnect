@@ -37,7 +37,7 @@ From the project root, run:
 
 The plugin JAR will be generated at:
 
-`build/libs/SimpleReconnect-1.0.jar`
+`build/libs/SimpleReconnect-1.1.0.jar`
 
 ## Installation
 
